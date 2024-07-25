@@ -1,9 +1,7 @@
-# React TypeScript Starter Pack
+This project is an online store where users can choose phones, tablets, and accessories.
+For the convenience of users, the website has added products filtration by price, name, or year of release and pagination. You can add products to your cart or select them to your favorites and buy them later.
 
-To use this template click `Use this template`
+Technologies that were used: React, TypeScript, CSS.
 
-### Available Scripts
+Link to the preview - [DEMO LINK](https://vinogradova8.github.io/react_phone_catalog/)
 
-`Deploy` - available to deploy your application to gh-pages
-
-`SCSS Preprocessor` - available to write your styles with modern style language

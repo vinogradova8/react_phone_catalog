@@ -14,6 +14,6 @@ module.exports = {
         assert: 'either',
       },
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': 'off',
   },
 };

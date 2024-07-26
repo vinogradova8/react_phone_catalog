@@ -49,6 +49,14 @@ export const TabletsPage: React.FC = () => {
       .finally(() => setLoader(false));
   }, []);
 
+  window.addEventListener('load', () => {
+    const params = new URLSearchParams(searchParams);
+
+    params.delete('query');
+
+    setSearchParams(params);
+  });
+
   const handleSetPageSearchParameter = useCallback(
     (pageNumber: number) => {
       const params = new URLSearchParams(searchParams);

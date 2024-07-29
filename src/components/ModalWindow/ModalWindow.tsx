@@ -28,7 +28,8 @@ export const ModalWindow: React.FC<Props> = ({
         })}
       >
         <p className="modal-window__text">
-          Checkout is not implemented yet. Do you want to clear the Cart?
+          Checkout is not implemented yet. <br />
+          Do you want to clear the Cart?
         </p>
         <div className="modal-window__actions">
           <button

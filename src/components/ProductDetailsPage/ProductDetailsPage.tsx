@@ -79,12 +79,16 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   useEffect(() => {
     if (currentProductFavorite) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
-  }, [currentProductFavorite]);
+  }, [currentProductFavorite, favoriteProducts]);
 
   useEffect(() => {
     if (currentProductInCart) {
       setIsSelected(true);
+    } else {
+      setIsSelected(false);
     }
   }, [currentProductInCart]);
 
@@ -105,6 +109,8 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   }, [products]);
 
   const loadProducts = useCallback(() => {
+    setLoader(true);
+
     switch (productPage) {
       case 'Tablets':
         getTablets()

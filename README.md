@@ -1,11 +1,13 @@
 This project is an online store where users can choose phones, tablets, and accessories.
 For the convenience of users, the website has added products filtration by price, name, or year of release and pagination. You can add products to your cart or select them to your favorites and buy them later.
 
-Technologies that were used:
-HTML - was used to build semantically correct pages.
-SCSS - was used for styling.
-React - is a library I choose for this project because it provides a robust and efficient way to build complex user interfaces with reusable components.
-TypeScript - helped me to avoid errors connected with variables types and make JavaScript more predictable.
+# Technologies that were used:
+<p>HTML - was used to build semantically correct pages.</p>
+<p>SCSS - was used for styling.</p>
+<p>React - is a library I choose for this project because it provides a robust and efficient way to build complex user interfaces with reusable components.</p>
+<p>TypeScript - helped me to avoid errors connected with variables types and make JavaScript more predictable.
+</p>
+
 
 To run the project locally:
 

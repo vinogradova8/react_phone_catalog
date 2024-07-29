@@ -15,6 +15,11 @@ export const Cart: React.FC = () => {
 
   const darkTheme = useOutletContext<boolean>();
 
+  const handleCheckout = () => {
+    setIsModalWindowOpen(true);
+    document.body.style.overflow = `hidden`;
+  };
+
   useEffect(() => {
     const newTotalPrice = allPrices.reduce((prev, item) => {
       return prev + item.sum;
@@ -78,12 +83,7 @@ export const Cart: React.FC = () => {
               </p>
             </div>
 
-            <button
-              className="add-to-cart-button"
-              onClick={() => {
-                setIsModalWindowOpen(true);
-              }}
-            >
+            <button className="add-to-cart-button" onClick={handleCheckout}>
               Checkout
             </button>
           </div>

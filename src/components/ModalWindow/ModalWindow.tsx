@@ -19,8 +19,20 @@ export const ModalWindow: React.FC<Props> = ({
   setAllPrices,
   setIsModalWindowOpen,
   darkTheme,
-}) =>
-  createPortal(
+}) => {
+  const handleClearCart = () => {
+    setItems([]);
+    setAllPrices([]);
+    setIsModalWindowOpen(false);
+    document.body.style.overflow = ``;
+  };
+
+  const handleCancel = () => {
+    setIsModalWindowOpen(false);
+    document.body.style.overflow = ``;
+  };
+
+  return createPortal(
     <div className="modal-window">
       <div
         className={cn('modal-window__container', {
@@ -32,22 +44,10 @@ export const ModalWindow: React.FC<Props> = ({
           Do you want to clear the Cart?
         </p>
         <div className="modal-window__actions">
-          <button
-            className="add-to-cart-button"
-            onClick={() => {
-              setItems([]);
-              setAllPrices([]);
-              setIsModalWindowOpen(false);
-            }}
-          >
+          <button className="add-to-cart-button" onClick={handleClearCart}>
             Clear
           </button>
-          <button
-            className="add-to-cart-button"
-            onClick={() => {
-              setIsModalWindowOpen(false);
-            }}
-          >
+          <button className="add-to-cart-button" onClick={handleCancel}>
             Cancel
           </button>
         </div>
@@ -55,3 +55,4 @@ export const ModalWindow: React.FC<Props> = ({
     </div>,
     portal,
   );
+};

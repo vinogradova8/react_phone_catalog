@@ -1,7 +1,7 @@
 This project is an online store where users can choose phones, tablets, and accessories.
 For the convenience of users, the website has added products filtration by price, name, or year of release and pagination. You can add products to your cart or select them to your favorites and buy them later.
 
-# Technologies that were used:
+<h6>Technologies that were used:</h6>
 <p>HTML - was used to build semantically correct pages.</p>
 <p>SCSS - was used for styling.</p>
 <p>React - is a library I choose for this project because it provides a robust and efficient way to build complex user interfaces with reusable components.</p>
@@ -9,7 +9,8 @@ For the convenience of users, the website has added products filtration by price
 </p>
 
 
-To run the project locally:
+
+<h6>To run the project locally:</h6>
 
 1. Clone the repo - select Code -> Local -> HTTPS/SSH and copy the link.
 2. Run 'git clone your_link'.

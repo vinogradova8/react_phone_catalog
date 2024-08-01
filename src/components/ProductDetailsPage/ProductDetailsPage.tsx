@@ -6,7 +6,13 @@ import React, {
   useState,
 } from 'react';
 import './ProductDetailsPage.scss';
-import { Link, useOutletContext, useParams } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  // useNavigate,
+  useOutletContext,
+  useParams,
+} from 'react-router-dom';
 
 import { Accessory } from '../../types/Accessory';
 import { Phone } from '../../types/Phone';
@@ -31,6 +37,11 @@ type Detailed = Accessory | Phone;
 
 export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   const { itemId } = useParams();
+  const { pathname } = useLocation();
+
+  let newPathArr: string[];
+
+  let newPath: string;
 
   const darkTheme = useOutletContext<boolean>();
 
@@ -41,6 +52,29 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   const currentDetailedProduct = useMemo(() => {
     return detailedProducts.find(item => itemId === item.id);
   }, [detailedProducts, itemId]);
+
+  // const colors = {
+  //   black: '#000000',
+  //   white: '#ffffff',
+  //   yellow: '#ffff00',
+  //   green: '#008000',
+  //   purple: '#800080',
+  //   red: '#ff0000',
+  //   midnightgreen: '#004953',
+  //   spacegray: '#707070',
+  //   gold: '#ffd700',
+  //   silver: '#c0c0c0',
+  //   skyblue: '#87CEEB',
+  //   rosegold: '	#b76e79',
+  //   midnight: '#191970',
+  //   coral: '#ff7f50',
+  //   spaceblack: '#111115',
+  //   blue: '#0000ff',
+  //   pink: '#ffc0cb',
+  //   sierrablue: '#BFDAF7',
+  //   graphite: '#41424C',
+  //   starlight: '#F8F9EC',
+  // };
 
   const {
     favoriteProducts,
@@ -103,6 +137,14 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   useEffect(() => {
     getProducts().then(setProducts);
   }, []);
+
+  const handleColorChange = (newColor: string) => {
+    setSelectedColor(newColor);
+    newPathArr = pathname.split('-');
+    newPathArr.splice(-1, 1, newColor);
+    newPath = newPathArr.join('-');
+    console.log(newPath);
+  };
 
   const randomProducts = useMemo(() => {
     return getSuggestedProducts(products, 10);
@@ -270,23 +312,24 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
                     <p className="product__char-subtitle">Available colors</p>
                     <div className="product__colors-container">
                       {currentDetailedProduct.colorsAvailable.map(color => (
-                        <div
-                          key={color}
-                          className={cn('product__color-box', {
-                            'product__color-box--selected':
-                              color === selectedColor,
-                            'product__color-box--dark-theme': darkTheme,
-                            'product__color-box--dark-theme-selected':
-                              color === selectedColor && darkTheme,
-                          })}
-                        >
-                          <button
-                            className="product__color"
-                            type="button"
-                            onClick={() => setSelectedColor(color)}
-                            style={{ backgroundColor: `${color}` }}
-                          />
-                        </div>
+                        <Link to={newPath} key={color}>
+                          <div
+                            className={cn('product__color-box', {
+                              'product__color-box--selected':
+                                color === selectedColor,
+                              'product__color-box--dark-theme': darkTheme,
+                              'product__color-box--dark-theme-selected':
+                                color === selectedColor && darkTheme,
+                            })}
+                          >
+                            <button
+                              className="product__color"
+                              type="button"
+                              onClick={() => handleColorChange(color)}
+                              style={{ backgroundColor: `${color}` }}
+                            />
+                          </div>
+                        </Link>
                       ))}
                     </div>
                     <p className="product__id">ID: 802390</p>

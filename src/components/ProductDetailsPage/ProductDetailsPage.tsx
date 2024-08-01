@@ -143,6 +143,7 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
     newPathArr = pathname.split('-');
     newPathArr.splice(-1, 1, newColor);
     newPath = newPathArr.join('-');
+    // eslint-disable-next-line no-console
     console.log(newPath);
   };
 

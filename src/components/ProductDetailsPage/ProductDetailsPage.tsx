@@ -6,13 +6,7 @@ import React, {
   useState,
 } from 'react';
 import './ProductDetailsPage.scss';
-import {
-  Link,
-  useLocation,
-  // useNavigate,
-  useOutletContext,
-  useParams,
-} from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 
 import { Accessory } from '../../types/Accessory';
 import { Phone } from '../../types/Phone';
@@ -37,11 +31,6 @@ type Detailed = Accessory | Phone;
 
 export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   const { itemId } = useParams();
-  const { pathname } = useLocation();
-
-  let newPathArr: string[];
-
-  let newPath: string;
 
   const darkTheme = useOutletContext<boolean>();
 
@@ -53,28 +42,33 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
     return detailedProducts.find(item => itemId === item.id);
   }, [detailedProducts, itemId]);
 
-  // const colors = {
-  //   black: '#000000',
-  //   white: '#ffffff',
-  //   yellow: '#ffff00',
-  //   green: '#008000',
-  //   purple: '#800080',
-  //   red: '#ff0000',
-  //   midnightgreen: '#004953',
-  //   spacegray: '#707070',
-  //   gold: '#ffd700',
-  //   silver: '#c0c0c0',
-  //   skyblue: '#87CEEB',
-  //   rosegold: '	#b76e79',
-  //   midnight: '#191970',
-  //   coral: '#ff7f50',
-  //   spaceblack: '#111115',
-  //   blue: '#0000ff',
-  //   pink: '#ffc0cb',
-  //   sierrablue: '#BFDAF7',
-  //   graphite: '#41424C',
-  //   starlight: '#F8F9EC',
-  // };
+  type Colors = {
+    [key: string]: string;
+  };
+
+  const colors: Colors = {
+    black: '#000000',
+    white: '#ffffff',
+    yellow: '#ffff00',
+    green: '#008000',
+    purple: '#800080',
+    red: '#ff0000',
+    midnightgreen: '#004953',
+    spacegray: '#707070',
+    'space gray': '#707070',
+    gold: '#ffd700',
+    silver: '#c0c0c0',
+    skyblue: '#87CEEB',
+    rosegold: '	#b76e79',
+    midnight: '#191970',
+    coral: '#ff7f50',
+    spaceblack: '#111115',
+    blue: '#0000ff',
+    pink: '#ffc0cb',
+    sierrablue: '#BFDAF7',
+    graphite: '#41424C',
+    starlight: '#F8F9EC',
+  };
 
   const {
     favoriteProducts,
@@ -139,12 +133,21 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
   }, []);
 
   const handleColorChange = (newColor: string) => {
-    setSelectedColor(newColor);
-    newPathArr = pathname.split('-');
-    newPathArr.splice(-1, 1, newColor);
-    newPath = newPathArr.join('-');
-    // eslint-disable-next-line no-console
-    console.log(newPath);
+    if (newColor === selectedColor) {
+      return;
+    }
+
+    setLoader(true);
+    setTimeout(() => setLoader(false), 1000);
+  };
+
+  const handleCapacityChange = (newCapacity: string) => {
+    if (newCapacity === selectedCapacity) {
+      return;
+    }
+
+    setLoader(true);
+    setTimeout(() => setLoader(false), 1000);
   };
 
   const randomProducts = useMemo(() => {
@@ -313,7 +316,10 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
                     <p className="product__char-subtitle">Available colors</p>
                     <div className="product__colors-container">
                       {currentDetailedProduct.colorsAvailable.map(color => (
-                        <Link to={newPath} key={color}>
+                        <Link
+                          key={color}
+                          to={`../${currentDetailedProduct.id.replace(currentDetailedProduct.color.split(' ').join('-'), color.split(' ').join('-'))}`}
+                        >
                           <div
                             className={cn('product__color-box', {
                               'product__color-box--selected':
@@ -327,7 +333,9 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
                               className="product__color"
                               type="button"
                               onClick={() => handleColorChange(color)}
-                              style={{ backgroundColor: `${color}` }}
+                              style={{
+                                backgroundColor: colors[`${color}`],
+                              }}
                             />
                           </div>
                         </Link>
@@ -341,17 +349,21 @@ export const ProductDetailsPage: React.FC<Props> = ({ productPage }) => {
                     <div className="product__capacity-container">
                       {currentDetailedProduct.capacityAvailable.map(
                         capacity => (
-                          <button
+                          <Link
                             key={capacity}
-                            className={cn('product__capacity-value', {
-                              'product__capacity-value--selected':
-                                capacity === selectedCapacity,
-                            })}
-                            type="button"
-                            onClick={() => setSelectedCapacity(capacity)}
+                            to={`../${currentDetailedProduct.id.replace(currentDetailedProduct.capacity.toLowerCase(), capacity.toLowerCase())}`}
                           >
-                            {`${capacity}`}
-                          </button>
+                            <button
+                              className={cn('product__capacity-value', {
+                                'product__capacity-value--selected':
+                                  capacity === selectedCapacity,
+                              })}
+                              type="button"
+                              onClick={() => handleCapacityChange(capacity)}
+                            >
+                              {`${capacity}`}
+                            </button>
+                          </Link>
                         ),
                       )}
                     </div>

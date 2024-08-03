@@ -49,7 +49,18 @@ main {
 
 .page {
   flex: 1 1 auto;
+  animation: smooth-appearance 1s linear 0s 1 normal forwards;
 }
+
+@keyframes burger {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
 .title {
   font-size: 22px;
@@ -336,6 +347,7 @@ main {
   height: 25px;
   border-radius: 20px;
   background-color: $dark-bg-color;
+  cursor: pointer;
 
   &::before {
     position: absolute;

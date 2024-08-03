@@ -42,7 +42,8 @@ export const Footer: React.FC<Props> = ({ darkTheme }) => {
             </li>
             <li>
               <Link
-                to="contacts"
+                to="https://github.com/vinogradova8"
+                target="_blank"
                 className={cn('footer__link', {
                   'footer__link--dark-theme': darkTheme,
                 })}
@@ -52,7 +53,8 @@ export const Footer: React.FC<Props> = ({ darkTheme }) => {
             </li>
             <li>
               <Link
-                to="rights"
+                to="https://github.com/vinogradova8"
+                target="_blank"
                 className={cn('footer__link', {
                   'footer__link--dark-theme': darkTheme,
                 })}

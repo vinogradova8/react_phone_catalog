@@ -5,6 +5,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease 0s;
 
   &--dark-theme {
     background-color: $dark-bg-color;
@@ -53,6 +54,17 @@
 
   &__nav {
     flex: 1 1 auto;
+    animation: smooth-appearance 1s linear 0s 1 normal forwards;
+  }
+
+  @keyframes smooth-appearance {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 
   &__nav-list {
@@ -67,6 +79,7 @@
     display: flex;
     justify-content: stretch;
     border-top: 1px solid $elements-color;
+    animation: smooth-appearance 1s linear 0s 1 normal forwards;
   }
 
   &__favorites {
